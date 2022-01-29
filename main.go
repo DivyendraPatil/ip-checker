@@ -15,6 +15,7 @@ var ipRangesApi = map[string]string{
 	"Fastly":      "api.fastly.com/public-ip-list",
 	"Atlassian":   "ip-ranges.atlassian.com",
 	"Amazon":      "ip-ranges.amazonaws.com/ip-ranges.json",
+	"Bing":        "www.bing.com/toolbox/bingbot.json",
 }
 
 func main() {
@@ -63,6 +64,10 @@ func checkRange(originName string, incomingIp string, body []byte) string {
 		}
 	case "Atlassian":
 		if api.Atlassian(body, incomingIp) {
+			return originName
+		}
+	case "Bing":
+		if api.Bing(body, incomingIp) {
 			return originName
 		}
 	}
