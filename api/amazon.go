@@ -1,4 +1,4 @@
-package main
+package api
 
 import (
 	"encoding/json"
@@ -22,7 +22,7 @@ type AmazonIpRangesStruct struct {
 	} `json:"ipv6_prefixes"`
 }
 
-func amazon(body []byte, incomingIp string) bool {
+func Amazon(body []byte, incomingIp string) bool {
 	var result AmazonIpRangesStruct
 	if err := json.Unmarshal(body, &result); err != nil {
 		fmt.Println("Can not unmarshal JSON from api response")

@@ -1,4 +1,4 @@
-package main
+package api
 
 import (
 	"encoding/json"
@@ -16,7 +16,7 @@ type GoogleIpRangesStruct struct {
 	} `json:"prefixes"`
 }
 
-func google(body []byte, incomingIp string) bool {
+func Google(body []byte, incomingIp string) bool {
 
 	var result GoogleIpRangesStruct
 	if err := json.Unmarshal(body, &result); err != nil {

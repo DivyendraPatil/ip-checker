@@ -2,6 +2,7 @@ package main
 
 import (
 	"fmt"
+	"ip-checker/api"
 	"net"
 	"os"
 	"strings"
@@ -49,30 +50,22 @@ func checkRange(originName string, incomingIp string, body []byte) string {
 	case "Google":
 		fallthrough
 	case "GoogleBot":
-		if google(body, incomingIp) {
+		if api.Google(body, incomingIp) {
 			return originName
 		}
 	case "Fastly":
-		if fastly(body, incomingIp) {
+		if api.Fastly(body, incomingIp) {
 			return originName
 		}
 	case "Amazon":
-		if amazon(body, incomingIp) {
+		if api.Amazon(body, incomingIp) {
 			return originName
 		}
 	case "Atlassian":
-		if atlassian(body, incomingIp) {
+		if api.Atlassian(body, incomingIp) {
 			return originName
 		}
 	}
 
 	return "Not Google"
-}
-
-func checkIfIpInRange(cidrRange string, incomingIp string) bool {
-	_, subnet, _ := net.ParseCIDR(cidrRange)
-	if subnet.Contains(net.ParseIP(incomingIp)) {
-		return true
-	}
-	return false
 }

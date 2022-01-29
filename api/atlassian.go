@@ -1,4 +1,4 @@
-package main
+package api
 
 import (
 	"encoding/json"
@@ -19,7 +19,7 @@ type AtlassianIpRangesStruct struct {
 	} `json:"items"`
 }
 
-func atlassian(body []byte, incomingIp string) bool {
+func Atlassian(body []byte, incomingIp string) bool {
 	var result AtlassianIpRangesStruct
 	if err := json.Unmarshal(body, &result); err != nil {
 		fmt.Println("Can not unmarshal JSON from api response")

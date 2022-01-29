@@ -1,4 +1,4 @@
-package main
+package api
 
 import (
 	"encoding/json"
@@ -10,7 +10,7 @@ type FastlyIpRangesStruct struct {
 	Ipv6Addresses []string `json:"ipv6_addresses"`
 }
 
-func fastly(body []byte, incomingIp string) bool {
+func Fastly(body []byte, incomingIp string) bool {
 	var result FastlyIpRangesStruct
 	if err := json.Unmarshal(body, &result); err != nil {
 		fmt.Println("Can not unmarshal JSON from api response")
