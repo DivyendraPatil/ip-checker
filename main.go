@@ -9,13 +9,13 @@ import (
 )
 
 var ipRangesApi = map[string]string{
-	"GoogleCloud": "www.gstatic.com/ipranges/cloud.json",
-	"Google":      "www.gstatic.com/ipranges/goog.json",
-	"GoogleBot":   "developers.google.com/search/apis/ipranges/googlebot.json",
-	"Fastly":      "api.fastly.com/public-ip-list",
-	"Atlassian":   "ip-ranges.atlassian.com",
-	"Amazon":      "ip-ranges.amazonaws.com/ip-ranges.json",
-	"Bing":        "www.bing.com/toolbox/bingbot.json",
+	"GoogleCloud": "https://www.gstatic.com/ipranges/cloud.json",
+	"Google":      "https://www.gstatic.com/ipranges/goog.json",
+	"GoogleBot":   "https://developers.google.com/search/apis/ipranges/googlebot.json",
+	"Fastly":      "https://api.fastly.com/public-ip-list",
+	"Atlassian":   "https://ip-ranges.atlassian.com",
+	"Amazon":      "https://ip-ranges.amazonaws.com/ip-ranges.json",
+	"Bing":        "https://www.bing.com/toolbox/bingbot.json",
 }
 
 func main() {
@@ -27,18 +27,18 @@ func main() {
 		panic("invalid Ip")
 	}
 
-	found := false
+	ipFound := false
 	for originName, apiHttp := range ipRangesApi {
 		jsonByte := getJsonBody(apiHttp)
 
 		if checkRange(originName, incomingIp, jsonByte) == originName {
 			fmt.Printf("This is a %s IP address \n", originName)
-			found = true
+			ipFound = true
 			break
 		}
 	}
 
-	if found == false {
+	if ipFound == false {
 		fmt.Println("This ip is not from Google")
 	}
 }
