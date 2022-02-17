@@ -16,7 +16,7 @@ type GoogleIpRangesStruct struct {
 	} `json:"prefixes"`
 }
 
-func Google(body []byte, incomingIp string) bool {
+func Google(body []byte, incomingIp string) (string, bool) {
 
 	var result GoogleIpRangesStruct
 	if err := json.Unmarshal(body, &result); err != nil {
@@ -27,14 +27,14 @@ func Google(body []byte, incomingIp string) bool {
 	for _, rec := range cidrRange {
 		if rec.Ipv4Prefix != "" {
 			if checkIfIpInRange(rec.Ipv4Prefix, incomingIp) == true {
-				return true
+				return metadata(rec.Scope), true
 			}
 		} else if rec.Ipv6Prefix != "" {
 			if checkIfIpInRange(rec.Ipv6Prefix, incomingIp) == true {
-				return true
+				return metadata(rec.Scope), true
 			}
 		}
 	}
 
-	return false
+	return "", false
 }

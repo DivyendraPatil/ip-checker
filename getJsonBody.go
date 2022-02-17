@@ -7,7 +7,7 @@ import (
 	"net/http"
 )
 
-func getJsonBody(apiHttp string) []byte {
+func getResponseBody(apiHttp string) []byte {
 
 	resp, err := http.Get(apiHttp)
 	if err != nil {

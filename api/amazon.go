@@ -22,7 +22,7 @@ type AmazonIpRangesStruct struct {
 	} `json:"ipv6_prefixes"`
 }
 
-func Amazon(body []byte, incomingIp string) bool {
+func Amazon(body []byte, incomingIp string) (string, bool) {
 	var result AmazonIpRangesStruct
 	if err := json.Unmarshal(body, &result); err != nil {
 		fmt.Println("Can not unmarshal JSON from api response")
@@ -30,13 +30,13 @@ func Amazon(body []byte, incomingIp string) bool {
 
 	for _, rec := range result.Prefixes {
 		if checkIfIpInRange(rec.IPPrefix, incomingIp) == true {
-			return true
+			return metadata(rec.Region), true
 		}
 	}
 	for _, rec := range result.Ipv6Prefixes {
 		if checkIfIpInRange(rec.Ipv6Prefix, incomingIp) == true {
-			return true
+			return metadata(rec.Region), true
 		}
 	}
-	return false
+	return "", false
 }
