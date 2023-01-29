@@ -22,6 +22,7 @@ var ipRangesApi = map[string]string{
 	"LinkedIn":      "https://raw.githubusercontent.com/SecOps-Institute/LinkedInIPLists/master/linkedin_ipv4_cidr_blocks.lst",
 	"Twitter":       "https://raw.githubusercontent.com/SecOps-Institute/TwitterIPLists/master/twitter_ipv4_cidr_blocks.lst",
 	"Facebook":      "https://raw.githubusercontent.com/SecOps-Institute/FacebookIPLists/master/facebook_ipv4_cidr_blocks.lst",
+	"Spamhaus":      "https://raw.githubusercontent.com/SecOps-Institute/SpamhausIPLists/master/drop.txt",
 }
 
 func main() {
